@@ -10,7 +10,7 @@ db.sqlite3
 .env
 
 # ML artifacts
-ml_assets/*.pkl
+# ml_assets/*.pkl
 
 # OS
 .DS_Store
