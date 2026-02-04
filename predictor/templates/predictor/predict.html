@@ -1,0 +1,130 @@
+{% extends 'predictor/base.html' %}
+
+{% block title %}Predict Score{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #495057;
+        font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    .submit-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- 🔹 TOP ACTION BAR -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <a href="{% url 'home' %}" class="btn btn-outline-primary btn-sm">
+            🏠 Home
+        </a>
+
+        <a href="{% url 'history' %}" class="btn btn-outline-secondary btn-sm ms-2">
+            📊 Previous Predictions
+        </a>
+    </div>
+
+    <!-- ✅ LOGOUT (POST only – Django 6 safe) -->
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-sm">
+            🚪 Logout
+        </button>
+    </form>
+
+</div>
+
+<h2 style="text-align: center; color: #667eea;">
+    Predict Your Job Fit Score
+</h2>
+
+<form method="POST" action="{% url 'predict' %}">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="cgpa">CGPA *</label>
+        <input type="number"
+               id="cgpa"
+               name="cgpa"
+               step="0.01"
+               min="5.0"
+               max="10.0"
+               required>
+    </div>
+
+    <div class="form-group">
+        <label for="skills_score">Skills Score (1-10) *</label>
+        <select id="skills_score" name="skills_score" required>
+            <option value="">Select skill level</option>
+            <option value="1">1 - Beginner</option>
+            <option value="5">5 - Intermediate</option>
+            <option value="8">8 - Advanced</option>
+            <option value="10">10 - Expert</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="projects">Number of Projects *</label>
+        <input type="number"
+               id="projects"
+               name="projects"
+               min="0"
+               max="10"
+               required>
+    </div>
+
+    <div class="form-group">
+        <label for="internship">Internship Experience *</label>
+        <select id="internship" name="internship" required>
+            <option value="">Select option</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="certifications">Certifications *</label>
+        <input type="number"
+               id="certifications"
+               name="certifications"
+               min="0"
+               max="8"
+               required>
+    </div>
+
+    <button type="submit" class="submit-btn">
+        Calculate Job Fit Score
+    </button>
+
+</form>
+
+{% endblock %}
