@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'predictor', 
+    'predictor.apps.PredictorConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -131,27 +132,27 @@ LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 
 ###############
-import os
-from django.contrib.auth import get_user_model
+# import os
+# from django.contrib.auth import get_user_model
 
-def create_default_admin():
-    User = get_user_model()
+# def create_default_admin():
+#     User = get_user_model()
 
-    username = os.environ.get("DJANGO_ADMIN_USERNAME")
-    password = os.environ.get("DJANGO_ADMIN_PASSWORD")
-    email = os.environ.get("DJANGO_ADMIN_EMAIL", "")
+#     username = os.environ.get("DJANGO_ADMIN_USERNAME")
+#     password = os.environ.get("DJANGO_ADMIN_PASSWORD")
+#     email = os.environ.get("DJANGO_ADMIN_EMAIL", "")
 
-    if username and password:
-        if not User.objects.filter(username=username).exists():
-            User.objects.create_superuser(
-                username=username,
-                password=password,
-                email=email
-            )
-            print("✅ Default admin user created")
+#     if username and password:
+#         if not User.objects.filter(username=username).exists():
+#             User.objects.create_superuser(
+#                 username=username,
+#                 password=password,
+#                 email=email
+#             )
+#             print("✅ Default admin user created")
 
-# Run once at startup
-try:
-    create_default_admin()
-except Exception as e:
-    print("⚠️ Admin creation skipped:", e)
+# # Run once at startup
+# try:
+#     create_default_admin()
+# except Exception as e:
+#     print("⚠️ Admin creation skipped:", e)
