@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.env
+
+# Node
+node_modules/
+.next/
+.env.local
+
+# Generated assets
+generated_reports/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
