@@ -1,0 +1,5 @@
+import { NextResponse } from "next/server";
+
+export async function POST() {
+  return NextResponse.json({ message: "Proxy endpoint placeholder" }, { status: 501 });
+}
